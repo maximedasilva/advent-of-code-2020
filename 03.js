@@ -324,13 +324,53 @@ const data = [
 '....###.....##.##....#.##.....#'
 ];
 
-const main = () => {
+/*const main = () => {
   let numberOfTrees = 0;
   data.forEach((line, index) => {
+    console.log(index);
     const lineTab = line.split('');
-    lineTab[(index*3)%lineTab.length] === '#' && numberOfTrees++
+    lineTab[(index*7)%lineTab.length] === '#' && numberOfTrees++
   });
   return numberOfTrees;
 }
 
+console.log(main());*/
+const findTrees = ({down, right}) => {
+  console.log(down, right)
+  const line = 0;
+  let numberOfTrees = 0;
+  data.forEach((line, index) => {
+    const lineTab = line.split('');
+
+    index%down === 0 && lineTab[(index*(right/down))%lineTab.length] === '#' && numberOfTrees++
+  });
+console.log(numberOfTrees)
+  return numberOfTrees;
+}
+
+const main = () => {
+  const directions = [
+    {
+      down: 1,
+      right: 1
+    },{
+      down: 1,
+      right: 3
+    },{
+      down: 1,
+      right: 5
+    },{
+      down: 1,
+      right: 7
+    },{
+      down: 2,
+      right: 1
+    }
+  ];
+  let result = 1;
+  for(direction of directions) {
+    result *=  findTrees(direction)
+  }
+  return result;
+}
 console.log(main());
