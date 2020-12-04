@@ -1002,27 +1002,41 @@ const data = [
   '6-7 q: qqqqvqhq',
 ];
 
+const xor = (a,b) => {
+   return ( a || b ) && !( a && b ); 
+}
+
 const splitData = (data) => {
   const firstSplit = data.split(' ');
   const [min, max] = firstSplit[0].split('-')
   const [letter] = firstSplit[1].split(':');
   const password = firstSplit[2];
-  console.log(password)
   return {min, max, letter, password};
 }
 
-const isPasswordValid = ({min, max, letter, password}) => {
+const isPasswordValid1stCondition = ({min, max, letter, password}) => {
   const wordTab = password.split('')
   const numberOfOccurences = wordTab.filter((current) => current === letter);
   return numberOfOccurences.length>=min && numberOfOccurences.length<=max;
 }
 
-const main = () => {
+const isPasswordValid2ndCondition = ({min, max, letter, password}) => {
+  const wordTab = password.split('')
+  return xor(wordTab[min-1] === letter, wordTab[max-1] === letter);
+}
+
+
+const main = (method) => {
   let numberOfIncorrect = 0;
   data.forEach((password) => {
     const dataObject = splitData(password);
-    isPasswordValid(dataObject) && numberOfIncorrect++;
+    method(dataObject) && numberOfIncorrect++;
   })
   return numberOfIncorrect;
 }
-console.log(main());
+
+// first part
+console.log(main(isPasswordValid1stCondition));
+
+// second part 
+console.log(main(isPasswordValid2ndCondition));
