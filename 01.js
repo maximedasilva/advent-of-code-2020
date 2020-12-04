@@ -223,5 +223,5 @@ for(const value of data) {
 }
 return null;
 }
-
-console.log(main(2020))
+//step one console.log(findOperand(2020));
+console.log(main(2020));
