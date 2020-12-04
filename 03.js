@@ -323,13 +323,14 @@ const data = [
 '......#..#..#.........#...#.#..',
 '....###.....##.##....#.##.....#'
 ];
+//PART ONE
 
 /*const main = () => {
   let numberOfTrees = 0;
   data.forEach((line, index) => {
     console.log(index);
     const lineTab = line.split('');
-    lineTab[(index*7)%lineTab.length] === '#' && numberOfTrees++
+    lineTab[(index*3)%lineTab.length] === '#' && numberOfTrees++
   });
   return numberOfTrees;
 }
